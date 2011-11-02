@@ -79,7 +79,19 @@ class Faq {
 	
 	
 	
-	public function AddFaq($mensaje);
+	/**
+	 * 
+	 * a–ade un nuevo elemento a la lista y a la bd
+	 * @param string $pregunta
+	 * @param string $respuesta
+	 */
+	public  function AddFaq($pregunta,$respuesta)
+	{
+		$newFaq = new FaqItem($pregunta, $respuesta);
+		$this->items[]= $newFaq;
+		$query = mysql_real_escape_string("insert into EasyFaqData (question,answer) values ($pregunta,$respuesta)");
+		mysql_query($query,$this->coneccion);
+	}
 	
 	/**
 	 * 
@@ -89,12 +101,12 @@ class Faq {
 	
 	public function load()
 	{
-		$query = "select question,answer from EasyFaqData";
+		$query = "select question,answer from EasyFaqData order by id dsc";
 		
 		$result = mysql_query($query,$this->coneccion);
 		foreach(mysql_fetch_object($result,FaqItem) as $object)
 		{
-			array_push($this->items,$object);
+			$this->items[]=$object;
 		}
 		
 	}
