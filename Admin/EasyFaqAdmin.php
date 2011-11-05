@@ -34,7 +34,7 @@ if(isset($_GET['borrar']))
 					<?php 
 						$faqList->PrintFaqs("no hay faqs", basename($_SERVER['PHP_SELF']));
 					?>
-					<a href="<?php echo basename($_SERVER['PHP_SELF']);?>?add&id="<?php echo $faqList->getLastId();?>">a–adir</a>
+					<a href="<?php echo basename($_SERVER['PHP_SELF']);?>?add&id=<?php echo $faqList->getLastId();?>">a–adir</a>
 		</div>
 		<!-- porfavor no remuevas esto -->
 		<div id="footer">EasyFaq por juan "<a href="ka-plum.co.cc">Cetus</a>" orozco</div>
