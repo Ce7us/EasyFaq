@@ -29,12 +29,12 @@ if($_SESSION['logged'])
 	</head>
 	
 	<body>
-		<div class="main container">
+		<div class="LogInContainer">
 			<?php	
 				if(isset($error))
-					echo "<div class\"error\">$error</div>";
+					echo "<div class\"Error\">$error</div>";
 			?>
-			<div class="loginform">
+			<div class="LogInForm">
 				<form method="post" action="login.php">
 					Usuario: <input id="user" type="text" /><br />
 					Pasword: <input id="user" type="password"><br />
@@ -42,5 +42,7 @@ if($_SESSION['logged'])
 				</form>
 			</div>
 		</div>
+		<!-- porfavor no remuevas esto -->
+		<div id="footer">EasyFaq por juan "<a href="ka-plum.co.cc">Cetus</a>" orozco</div>
 	</body>
 </html>

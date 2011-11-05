@@ -1,5 +1,7 @@
 <?php
 
+include_once 'FaqItem.php' or die("erorr fatal");
+
 /** 
  * lista de faq
  * 
@@ -34,7 +36,7 @@ class Faq {
 	}
 	
 	/**
-	 * 
+	 * limpia la memoria
 	 */
 	function __destruct() {
 		mysql_close($this->coneccion);
@@ -53,8 +55,9 @@ class Faq {
 	 * 
 	 * @return bool : false si ocurre un error / true si todo salio bien
 	 * @param string $mensaje mensaje a imprimir si no hay elementos
+	 * @param string $adminPage [Opcional] si esta definida activa las funciones administrativas
 	 */
-	public function PrintFaqs($mensaje)
+	public function PrintFaqs($mensaje,$adminPage)
 	{ 
 		echo '<!-- generado por EasyFaq-->/n <div class="faq">\n';//porfavor no remueva esta linea
 		
@@ -66,7 +69,7 @@ class Faq {
 				foreach($this->items as $item)
 				{
 					
-					echo "<div class\"pregunta\">$item->Pregunta</div><div class=\"pregunta\">$item->respuesta</div>";
+					echo "<div class=\"Row\"><div class=\"pregunta\">$item->Pregunta</div><div class=\"pregunta\">$item->respuesta</div>". (isset($adminPage)) ? " <div class=\"delete\"><a href=\"$adminPage?borrar&id=$item->id\">borrar</a></div> <div class=\"delete\"><a href=\"$adminPage?borrar\">modificar&id=$item->id</a></div>" : ""."</div>";
 					
 				}
 		
@@ -74,6 +77,24 @@ class Faq {
 		echo '</div>/n<!--fin EasyFaq-->/n';//tampoco remueva esta
 		
 		return $this->count != 0;
+		
+	}
+	
+	/**
+	 * busca y regresa un item de la lista o null si no se encontro
+	 * 
+	 * @param int $id
+	 * @return FaqItem
+	 */	
+	public function getId(int $id)
+	{
+		foreach($this->items as $item)
+		{
+			if($item->id == $id)
+				return $item;
+		}
+			
+		return null;
 		
 	}
 	
@@ -93,6 +114,27 @@ class Faq {
 		mysql_query($query,$this->coneccion);
 	}
 	
+	
+	/**
+	 * elimina un elemento presente, regresa false si no existe el elemento
+	 * 
+	 * @param int $id
+	 * @return boolean
+	 */
+	public  function delFaq(int $id)
+	{
+		if($this->getId($id) != null)
+		{
+			$query = mysql_real_escape_string("delete from EasyFaqData where id=$id");
+			mysql_query($query,$this->coneccion);
+			
+			return true;			
+		}
+		
+		return false;
+	}
+	
+	
 	/**
 	 * 
 	 * carga las faq desde la base de datos
@@ -101,7 +143,7 @@ class Faq {
 	
 	public function load()
 	{
-		$query = "select question,answer from EasyFaqData order by id dsc";
+		$query = "select id,question,answer from EasyFaqData order by id";
 		
 		$result = mysql_query($query,$this->coneccion);
 		foreach(mysql_fetch_object($result,FaqItem) as $object)
@@ -111,9 +153,31 @@ class Faq {
 		
 	}
 	
+	/**
+	 * regresa el numero de elementos presentes 
+	 * 
+	 * @return int Count
+	 */	
+	public function getCount()
+	{
+		return $this->count;
+	}
+	
+	
+	/**
+	 * regresa el id del ultimo elemento en la lista
+	 * 
+	 * @return int lastId
+	 */
+	public function getLastId()
+	{
+		return $this->lastId;
+	}
+	
 	private	$coneccion;
 	private $count;
 	private $items;
+	private $lastId;
 		
 }
 

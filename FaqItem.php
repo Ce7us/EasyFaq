@@ -24,10 +24,11 @@ class FaqItem {
 	 * @param string $answer
 	 * @since 1.0
 	 */
-	function __construct($question,$answer) {
+	function __construct($id,$question,$answer) {
 		
-		$this->Pregunta=$question;
-		$this->respuesta=$answer;
+		$this->Pregunta = $question;
+		$this->respuesta = $answer;
+		$this->id = $id;
 		
 
 	}
@@ -42,6 +43,7 @@ class FaqItem {
 	
 	public $Pregunta;
 	public $respuesta;
+	public $id;
 }
 
 ?>
