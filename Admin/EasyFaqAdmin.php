@@ -1,14 +1,16 @@
 <?php
 
-$config =  parse_ini_file("EasyFaqConfig.ini",TRUE);
+$config =  parse_ini_file("EasyFaqConfig.ini.php",TRUE);
 //evitar que se usa la configuracion por defecto
 if($config['UserData']['user']== "root" && $config['UserData']['pass'] == 'toor' )
 	die("porfavor modifique los datos de login predeterminados antes de usar el servicio");
 
-if(!$_SESSION['logged'])
-	header("location: /login.php");
+session_start();
 
-include_once 'Faq.php';
+if(!$_SESSION['logged'])
+	header("location: login.php");
+
+include_once '../Faq.php';
 
 $faqList = new Faq($config['DbData']['user'], $config['DbData']['pass'], $config['DbData']['host'], $config['DbData']['DB']);
 
