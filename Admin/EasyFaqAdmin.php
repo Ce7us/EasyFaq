@@ -22,7 +22,7 @@ if(isset($_GET['borrar']))
 
 if(isset($_POST['add']))
 {
-	$faqList->AddFaq($_POST['pregunta'], $_POST[respuesta]);
+	$faqList->AddFaq($_POST['pregunta'], $_POST[respuesta]); 
 }
 
 
