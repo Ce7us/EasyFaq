@@ -20,6 +20,11 @@ if(isset($_GET['borrar']))
 	
 }
 
+if(isset($_POST['add']))
+{
+	$faqList->AddFaq($_POST['pregunta'], $_POST[respuesta]);
+}
+
 
 ?>
 
@@ -34,7 +39,16 @@ if(isset($_GET['borrar']))
 					<?php 
 						$faqList->PrintFaqs("no hay faqs", basename($_SERVER['PHP_SELF']));
 					?>
-					<a href="<?php echo basename($_SERVER['PHP_SELF']);?>?add&id=<?php echo $faqList->getLastId();?>">a–adir</a>
+					
+					<div id="AddNew">
+						<form id="new" action="<?php echo basename($_SERVER['PHP_SELF']);?>" method="post">
+							<input type="hidden" id="id" value="<?php echo $faqList->getLastId();?>" />
+							<input type="hidden" id="add" />
+							<input type="text" id="pregunta" />
+							<textarea rows="10" cols="30" id="respuesta"></textarea>
+							<input type="submit" value="A–adir" />
+						</form> 
+					</div>
 		</div>
 		<!-- porfavor no remuevas esto -->
 		<div id="footer">EasyFaq por juan "<a href="ka-plum.co.cc">Cetus</a>" orozco</div>

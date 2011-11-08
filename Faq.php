@@ -108,9 +108,8 @@ class Faq {
 	 */
 	public  function AddFaq($pregunta,$respuesta)
 	{
-		$newFaq = new FaqItem($pregunta, $respuesta);
-		$this->items[]= $newFaq;
-		$query = mysql_real_escape_string("insert into EasyFaqData (question,answer) values ($pregunta,$respuesta)");
+		$this->items[]= new FaqItem($pregunta, $respuesta);
+		$query = mysql_real_escape_string("insert into EasyFaqData (question,answer) values ('$pregunta','$respuesta')");
 		mysql_query($query,$this->coneccion);
 	}
 	
