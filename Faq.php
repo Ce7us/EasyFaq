@@ -28,7 +28,7 @@ class Faq {
 	 * @param string $db
 	 */
 	function __construct($usr,$psw,$host,$db) {
-		$this->coneccion = mysql_connect($host,$usr,$psw);
+		$this->coneccion = mysql_connect($host,$usr,$psw) or die("error de conexion") ;
 		mysql_select_db($db,$this->coneccion);
 		
 		$this->count = 0;
