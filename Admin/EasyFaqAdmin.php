@@ -1,6 +1,6 @@
 <?php
 
-$config =  parse_ini_file("EasyFaqConfig.ini.php",TRUE);
+$config =  parse_ini_file("EasyFaqConfig.ini.php",TRUE,INI_SCANNER_RAW);
 //evitar que se usa la configuracion por defecto
 if($config['UserData']['user']== "root" && $config['UserData']['pass'] == 'toor' )
 	die("porfavor modifique los datos de login predeterminados antes de usar el servicio");

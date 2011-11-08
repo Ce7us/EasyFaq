@@ -102,7 +102,7 @@ class Faq {
 	
 	/**
 	 * 
-	 * a–ade un nuevo elemento a la lista y a la bd
+	 * añade un nuevo elemento a la lista y a la bd
 	 * @param string $pregunta
 	 * @param string $respuesta
 	 */
