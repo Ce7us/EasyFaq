@@ -14,7 +14,7 @@
 	;cambialo por tus datos
 	user = "root"
 	pass = "toor";
-	host = "exampla.com:42"
+	host = "example.com:80"
 	DB = "DatabaseName"
 
 ;end
